@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Good vibes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+  </head>
+  <body>
+    <div class="container">
+      <object type="application/x-shockwave-flash" class="flash"
+              data="{{ url_for('static', filename=filename) }}" >
+        <param name="movie" value="{{ url_for('static', filename=filename) }}"/>
+        <param name="quality" value="high"/>
+      </object>
+    </div>
+  </body>
+</html>
