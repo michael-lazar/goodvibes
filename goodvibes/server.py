@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def get_index():
-    files = os.listdir(FLASH)
+    files = [f for f in os.listdir(FLASH) if f.endswith('.swf')]
     filename = os.path.join('flash', random.choice(files))
     return render_template('index.html', filename=filename)
 
