@@ -23,6 +23,6 @@ $ gevent goodvibes.server:app
 ```
 
 ## Shortcuts
-- <Kbd>◄</kbd>: Previous video
+- <kbd>◄</kbd>: Previous video
 - <kbd>►</kbd>: Next video
 - <kbd>SPACE</kbd>: Random video
