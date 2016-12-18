@@ -4,15 +4,28 @@
     <meta charset="UTF-8">
     <title>Good vibes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <script> var videos = {{ videos|tojson }}; </script>
     <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
   </head>
   <body>
     <div class="container">
-      <object type="application/x-shockwave-flash" class="flash"
-              data="{{ url_for('static', filename=filename) }}" >
-        <param name="movie" value="{{ url_for('static', filename=filename) }}"/>
+      <object type="application/x-shockwave-flash" id="flash" data="">
+        <param name="movie" value=""/>
         <param name="quality" value="high"/>
       </object>
     </div>
   </body>
+  <footer>
+    <div class="controls">
+        <i class="fa fa-step-backward fa-2x media-control" onclick="controller.inc()"></i>
+        <form onsubmit="controller.select()" class="search-form">
+            <input placeholder="Search..." list="videos" id="search-box">
+        </form>
+        <i class="fa fa-step-forward fa-2x media-control" onclick="controller.dec()"></i>
+        <datalist id="videos">
+            {% for video in videos %}<option value="{{ video }}">{% endfor %}
+        </datalist>
+    </div>
+  </footer>
 </html>

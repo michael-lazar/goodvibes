@@ -8,6 +8,8 @@ Minimal navigation controls are provided to switch between songs.
 
 This project is hosted @ https://chill-out.herokuapp.com/
 
+Google Chrome is recommended, there are known issues with Firefox.
+
 ## Setup
 To run your own server using gunicorn (recommended)
 
@@ -19,3 +21,8 @@ $ source venv/bin/activate
 $ pip install -r requirements.txt
 $ gevent goodvibes.server:app
 ```
+
+## Shortcuts
+- <Kbd>◄</kbd>: Previous video
+- <kbd>►</kbd>: Next video
+- <kbd>SPACE</kbd>: Random video
