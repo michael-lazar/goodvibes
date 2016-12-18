@@ -3,7 +3,7 @@
 **Relaxing music loops from /f/**
 
 This project houses a selection of flash videos with atmospheric music and images.
-Flash is no longer a popular media format, but I think that it offers a certain lo-fi charm that adds to the experience.
+Flash is no longer a popular media format, but I think that it can add a certain lo-fi charm.
 Minimal navigation controls are provided to switch between songs.
 
 This project is hosted @ https://chill-out.herokuapp.com/
