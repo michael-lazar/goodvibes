@@ -1,28 +1,4 @@
 <!DOCTYPE html>
-<script>
-function selectFlash() {
-    var flash = document.getElementById('search-box').value;
-    window.location = window.location.protocol + '//' + window.location.host + '/' + encodeURIComponent(flash);
-}
-
-function checkKey(e) {
-    e = e || window.event;
-    if (e.keyCode == '37') {
-        // left arrow
-        document.getElementById('prev-button').click();
-    }
-    else if (e.keyCode == '39') {
-        // right arrow
-        document.getElementById('next-button').click();
-    }
-    else if (e.keyCode == '0' || e.keyCode == '32') {
-        // space
-        window.location = window.location.protocol + '//' + window.location.host;
-    }
-}
-document.onkeydown = checkKey;
-</script>
-
 <html>
   <head>
     <meta charset="UTF-8">
@@ -30,6 +6,32 @@ document.onkeydown = checkKey;
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
     <link rel="icon" type='image/png' href="{{ url_for('static', filename='favicon.png') }}">
+    <script>
+        function selectFlash() {
+            var flash = document.getElementById('search-box').value;
+            var href = window.location.protocol + '//' + window.location.host + '/' + encodeURIComponent(flash);
+            window.location.replace(href);
+            return false;
+        }
+
+        function checkKey(e) {
+            e = e || window.event;
+            if (e.keyCode == '37') {
+                // left arrow
+                document.getElementById('prev-button').click();
+            }
+            else if (e.keyCode == '39') {
+                // right arrow
+                document.getElementById('next-button').click();
+            }
+            else if (e.keyCode == '0' || e.keyCode == '32') {
+                // space
+                var href = window.location.protocol + '//' + window.location.host;
+                window.location.replace(href);
+            }
+        }
+        document.onkeydown = checkKey;
+    </script>
   </head>
   <body>
     <div class="container" onload="">
@@ -43,7 +45,7 @@ document.onkeydown = checkKey;
     <div class="controls">
         <i class="fa fa-step-backward fa-2x media-control" id="prev-button"
            onclick="window.location='{{ prev_flash }}'"></i>
-        <form class="search-form" onsubmit="selectFlash()" >
+        <form class="search-form" onsubmit="return selectFlash()" >
             <input placeholder="Search..." list="video-list" id="search-box">
             <datalist id="video-list">
                 {% for flash in flashes %}<option value="{{ flash }}">{% endfor %}
