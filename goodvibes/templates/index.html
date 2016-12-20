@@ -1,31 +1,57 @@
 <!DOCTYPE html>
+<script>
+function selectFlash() {
+    var flash = document.getElementById('search-box').value;
+    window.location = window.location.protocol + '//' + window.location.host + '/' + encodeURIComponent(flash);
+}
+
+function checkKey(e) {
+    e = e || window.event;
+    if (e.keyCode == '37') {
+        // left arrow
+        document.getElementById('prev-button').click();
+    }
+    else if (e.keyCode == '39') {
+        // right arrow
+        document.getElementById('next-button').click();
+    }
+    else if (e.keyCode == '0' || e.keyCode == '32') {
+        // space
+        window.location = window.location.protocol + '//' + window.location.host;
+    }
+}
+document.onkeydown = checkKey;
+</script>
+
 <html>
   <head>
     <meta charset="UTF-8">
     <title>Good vibes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
-    <script> var videos = {{ videos|tojson }}; </script>
-    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+    <link rel="icon" type='image/png' href="{{ url_for('static', filename='favicon.png') }}">
   </head>
   <body>
-    <div class="container">
-      <object type="application/x-shockwave-flash" id="flash" data="">
-        <param name="movie" value=""/>
+    <div class="container" onload="">
+      <object type="application/x-shockwave-flash" class="flash" data="{{ flash_source }}">
+        <param name="movie" value="{{ flash_source }}"/>
         <param name="quality" value="high"/>
       </object>
     </div>
   </body>
   <footer>
     <div class="controls">
-        <i class="fa fa-step-backward fa-2x media-control" onclick="controller.inc()"></i>
-        <form onsubmit="controller.select()" class="search-form">
-            <input placeholder="Search..." list="videos" id="search-box">
+        <i class="fa fa-step-backward fa-2x media-control" id="prev-button"
+           onclick="window.location='{{ prev_flash }}'"></i>
+        <form class="search-form" onsubmit="selectFlash()" >
+            <input placeholder="Search..." list="video-list" id="search-box">
+            <datalist id="video-list">
+                {% for flash in flashes %}<option value="{{ flash }}">{% endfor %}
+            </datalist>
+            <input type="submit" value="Go">
         </form>
-        <i class="fa fa-step-forward fa-2x media-control" onclick="controller.dec()"></i>
-        <datalist id="videos">
-            {% for video in videos %}<option value="{{ video }}">{% endfor %}
-        </datalist>
+        <i class="fa fa-step-forward fa-2x media-control" id="next-button"
+           onclick="window.location='{{ next_flash }}'"></i>
     </div>
   </footer>
 </html>
