@@ -8,8 +8,6 @@ Minimal navigation controls are provided to switch between songs.
 
 This project is hosted @ https://chill-out.herokuapp.com/
 
-Google Chrome is recommended, there are known issues with Firefox.
-
 ## Setup
 To run your own server using gunicorn (recommended)
 
