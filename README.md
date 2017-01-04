@@ -6,7 +6,7 @@ This project houses a selection of flash videos with atmospheric music and image
 Flash is no longer a popular media format, but I think that it can add a certain lo-fi charm.
 Minimal navigation controls are provided to switch between songs.
 
-This project is hosted @ https://chill-out.herokuapp.com/
+This project is hosted @ https://chill-out.herokuapp.com/. The hosted version does not contain all of the videos because Heroku has a 300MB limit
 
 ## Setup
 To run your own server using gunicorn (recommended)
