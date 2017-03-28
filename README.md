@@ -1,4 +1,4 @@
-# ~Good~Vibes~
+# \~Good\~Vibes\~
 
 **Relaxing music loops from /f/**
 
