@@ -6,7 +6,7 @@ This project houses a selection of flash videos with atmospheric music and image
 Flash is no longer a popular media format, but I think that in this case it adds a lo-fi charm.
 Minimal navigation controls are provided to switch between songs.
 
-This site is hosted @ https://chill-out.herokuapp.com/. The hosted version does not contain all of the videos because Heroku has a 300MB limit.
+This site is hosted @ https://chill-out.herokuapp.com/. The hosted version does not contain all of the videos because Heroku has a 300MB limit on the size of the repository.
 
 ![screenshot](resources/good_vibes.png)
 
