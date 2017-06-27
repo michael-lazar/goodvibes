@@ -1,6 +1,8 @@
 # \~Good\~Vibes\~
 
-**Relaxing music loops from /f/**
+### Relaxing music loops from /f/
+
+![screenshot](resources/good_vibes.png)
 
 This project houses a selection of flash videos with atmospheric music and images.
 Flash is no longer a popular media format, but I think that in this case it adds a lo-fi charm.
