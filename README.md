@@ -1,4 +1,4 @@
-# \~Good\~Vibes\~
+# <p align="center"><img src="https://github.com/michael-lazar/goodvibes/blob/master/resources/logo.png"></img></p>
 
 ### Relaxing music loops from /f/
 
