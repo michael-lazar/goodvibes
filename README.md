@@ -11,7 +11,7 @@ The server is hosted @ https://chill-out.herokuapp.com/. The hosted version does
 ![screenshot](resources/good_vibes.png)
 
 ## Setup
-To run your own server using gunicorn (recommended)
+To run your own server using gunicorn
 
 ```bash
 $ git clone https://github.com/michael-lazar/goodvibes
