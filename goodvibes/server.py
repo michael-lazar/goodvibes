@@ -5,6 +5,9 @@ from flask import Flask, render_template, url_for, redirect, abort
 
 app = Flask(__name__)
 
+# Compatibility for mod_wsgi
+application = app
+
 def _get_flashes():
     # Refresh on every request to support adding files to the directory
     flash_dir = os.path.join(os.path.dirname(__file__), 'static', 'flash')
