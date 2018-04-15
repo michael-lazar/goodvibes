@@ -8,17 +8,20 @@ app = Flask(__name__)
 # Compatibility for mod_wsgi
 application = app
 
+
 def _get_flashes():
     # Refresh on every request to support adding files to the directory
     flash_dir = os.path.join(os.path.dirname(__file__), 'static', 'flash')
     flashes = (f for f in os.listdir(flash_dir) if f.endswith('.swf'))
     return sorted(f[:-4] for f in flashes)
 
+
 @app.route("/")
 def get_index():
     flashes = _get_flashes()
     flash = random.choice(flashes)
     return redirect(url_for('get_flash', flash=flash))
+
 
 @app.route("/<flash>")
 def get_flash(flash=None):

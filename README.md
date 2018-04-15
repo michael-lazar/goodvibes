@@ -8,8 +8,6 @@ Minimal navigation controls are provided to switch between songs.
 
 This server is hosted @ http://goodvibes.mozz.us/
 
-It's also on heroku @ https://chill-out.herokuapp.com/. The Heroku version does not contain all of the videos because Heroku has a 300MB limit on the size of the repository.
-
 ![screenshot](resources/good_vibes.png)
 
 ## Setup
