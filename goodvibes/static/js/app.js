@@ -1,6 +1,6 @@
 function selectFlash() {
     var flash = document.getElementById('search-box').value;
-    var href = window.location.protocol + '//' + window.location.host + '/' + encodeURIComponent(flash);
+    var href = window.location.protocol + '//' + window.location.host + '/f/' + encodeURIComponent(flash);
     window.location.replace(href);
     return false;
 }
