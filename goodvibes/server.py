@@ -2,28 +2,50 @@ import os
 import random
 
 from flask import Flask, render_template, url_for, redirect, abort
+from flask_admin import Admin
+from flask_admin.contrib.fileadmin import FileAdmin
+from flask_basicauth import BasicAuth
+from werkzeug.exceptions import HTTPException
+
+
+FLASH_DIR = os.path.join(os.path.dirname(__file__), 'static', 'flash')
 
 app = Flask(__name__)
+application = app  # Alias for mod_wsgi compatibility
+app.config.from_pyfile('server.cfg')
+basic_auth = BasicAuth(app)
+admin = Admin(app)
 
-# Compatibility for mod_wsgi
-application = app
+
+class FileView(FileAdmin):
+
+    def is_accessible(self):
+        if not basic_auth.authenticate():
+            raise HTTPException('', basic_auth.challenge())
+        return True
+
+
+# Enable uploading & deleting flash files using the /admin endpoint
+admin.add_view(FileView(FLASH_DIR, '/static/flash/'))
 
 
 def _get_flashes():
     # Refresh on every request to support adding files to the directory
-    flash_dir = os.path.join(os.path.dirname(__file__), 'static', 'flash')
-    flashes = (f for f in os.listdir(flash_dir) if f.endswith('.swf'))
+    flashes = (f for f in os.listdir(FLASH_DIR) if f.endswith('.swf'))
     return sorted(f[:-4] for f in flashes)
 
 
 @app.route("/")
 def get_index():
     flashes = _get_flashes()
+    if not flashes:
+        return "Flash directory is empty, add files to the server!"
+
     flash = random.choice(flashes)
     return redirect(url_for('get_flash', flash=flash))
 
 
-@app.route("/<flash>")
+@app.route("/f/<flash>")
 def get_flash(flash=None):
     flashes = _get_flashes()
     if flash not in flashes:
