@@ -19,6 +19,7 @@ $ cd goodvibes
 $ python3 -m virtualenv venv
 $ source venv/bin/activate
 $ pip install -r requirements.txt
+$ cp server.cfg.example server.cfg
 $ gunicorn goodvibes.server:app
 ```
 
