@@ -45,9 +45,14 @@ def get_index():
     return redirect(url_for('get_flash', flash=flash))
 
 
+@app.route('/f/')
 @app.route("/f/<flash>")
 def get_flash(flash=None):
     flashes = _get_flashes()
+    if not flashes:
+        return "Flash directory is empty, add files to the server!"
+
+    flash = flash or random.choice(flashes)
     if flash not in flashes:
         abort(404)
 
