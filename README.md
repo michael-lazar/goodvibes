@@ -2,8 +2,8 @@
 
 ### Relaxing music loops from /f/
 
-This project houses a selection of flash videos with atmospheric music and images.
-Flash is no longer a popular media format, but I think that in this case it adds a lo-fi charm.
+This project houses my personal collection of flash videos with atmospheric music and images.
+Flash is no longer a popular media format, but it lives on in my heart.
 Minimal navigation controls are provided to switch between songs.
 
 This server is hosted @ http://goodvibes.mozz.us/
