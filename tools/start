@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+export PYTHONUNBUFFERED=1
+
+exec uv run python -m flask --app goodvibes.server run --debug --port 5001 "$@"

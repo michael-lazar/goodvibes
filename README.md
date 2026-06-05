@@ -10,17 +10,13 @@ This server is hosted @ http://goodvibes.mozz.us/
 
 ![screenshot](resources/good_vibes.png)
 
-## Setup
-To run your own server using gunicorn
+## Quick start
 
 ```bash
 $ git clone https://github.com/michael-lazar/goodvibes
 $ cd goodvibes
-$ python3 -m virtualenv venv
-$ source venv/bin/activate
-$ pip install -r requirements.txt
-$ cp server.cfg.example server.cfg
-$ gunicorn goodvibes.server:app
+$ tools/bootstrap
+$ tools/start
 ```
 
 ## Shortcuts

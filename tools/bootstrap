@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+export PYTHONUNBUFFERED=1
+
+uv sync --all-groups
+
+if [ ! -f .env ]; then
+    cp .env.example .env
+    echo "Created .env from .env.example — fill in SECRET_KEY and basic auth creds."
+fi
+
+echo "Bootstrap completed!"
+echo ""
+echo "To launch the server, run:"
+echo "tools/start"

@@ -1,38 +1,42 @@
 import os
 import random
+from pathlib import Path
 
-from flask import Flask, render_template, url_for, redirect, abort
+from dotenv import load_dotenv
+from flask import Flask, abort, redirect, render_template, url_for
 from flask_admin import Admin
 from flask_admin.contrib.fileadmin import FileAdmin
 from flask_basicauth import BasicAuth
 from werkzeug.exceptions import HTTPException
 
+load_dotenv()
 
-FLASH_DIR = os.path.join(os.path.dirname(__file__), 'static', 'flash')
+_DEFAULT_FLASH_DIR = Path(__file__).parent / "static" / "flash"
+FLASH_DIR = Path(os.environ.get("GOODVIBES_FLASH_DIR", _DEFAULT_FLASH_DIR))
 
 app = Flask(__name__)
-application = app  # Alias for mod_wsgi compatibility
-app.config.from_pyfile('server.cfg')
+app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
+app.config["BASIC_AUTH_USERNAME"] = os.environ["BASIC_AUTH_USERNAME"]
+app.config["BASIC_AUTH_PASSWORD"] = os.environ["BASIC_AUTH_PASSWORD"]
+
 basic_auth = BasicAuth(app)
 admin = Admin(app)
 
 
 class FileView(FileAdmin):
-
     def is_accessible(self):
         if not basic_auth.authenticate():
-            raise HTTPException('', basic_auth.challenge())
+            raise HTTPException("", basic_auth.challenge())
         return True
 
 
 # Enable uploading & deleting flash files using the /admin endpoint
-admin.add_view(FileView(FLASH_DIR, '/static/flash/'))
+admin.add_view(FileView(str(FLASH_DIR), "/static/flash/"))
 
 
 def _get_flashes():
     # Refresh on every request to support adding files to the directory
-    flashes = (f for f in os.listdir(FLASH_DIR) if f.endswith('.swf'))
-    return sorted(f[:-4] for f in flashes)
+    return sorted(p.stem for p in FLASH_DIR.iterdir() if p.suffix == ".swf")
 
 
 @app.route("/")
@@ -42,7 +46,7 @@ def get_index():
         return "Flash directory is empty, add files to the server!"
 
     flash = random.choice(flashes)
-    return redirect(url_for('get_flash', flash=flash))
+    return redirect(url_for("get_flash", flash=flash))
 
 
 @app.route("/f/<flash>")
@@ -52,17 +56,12 @@ def get_flash(flash=None):
         abort(404)
 
     index = flashes.index(flash)
-    source = os.path.join('flash', flash + '.swf')
     next_flash = flashes[(index + 1) % len(flashes)]
     prev_flash = flashes[(index - 1) % len(flashes)]
     return render_template(
-        'index.html',
+        "index.html",
         flashes=flashes,
-        flash_source=url_for('static', filename=source),
-        next_flash=url_for('get_flash', flash=next_flash),
-        prev_flash=url_for('get_flash', flash=prev_flash))
-
-
-if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+        flash_source=url_for("static", filename=f"flash/{flash}.swf"),
+        next_flash=url_for("get_flash", flash=next_flash),
+        prev_flash=url_for("get_flash", flash=prev_flash),
+    )

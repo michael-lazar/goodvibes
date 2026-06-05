@@ -1,3 +1,0 @@
-SECRET_KEY = 'Change me!'
-BASIC_AUTH_USERNAME = 'john'
-BASIC_AUTH_PASSWORD = 'matrix'

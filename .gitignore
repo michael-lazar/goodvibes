@@ -1,6 +1,23 @@
-__pycache__
 .idea
+.DS_Store
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ruff_cache/
+
+# uv
+.venv/
+.python-version
+
+# Local config
+.env
+
+# Editor
 *.swp
+
+# Data — flash files are not tracked
 *.swf
-venv
-server.cfg
+data/
